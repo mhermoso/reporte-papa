@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reporte de Salud — Papá · 23 oct 2026</title>
+<style>
+  :root{
+    --bg:#0d1117; --card:#161b22; --card2:#1c2430; --line:#2d3748;
+    --txt:#e6edf3; --dim:#8b949e;
+    --ok:#3fb950; --okbg:#12261a;
+    --warn:#d29922; --warnbg:#2b2111;
+    --bad:#f85149; --badbg:#2d1418;
+    --accent:#58a6ff; --gold:#e3b341;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg); color:var(--txt); line-height:1.6;
+    padding:16px; max-width:900px; margin:0 auto;
+    -webkit-font-smoothing:antialiased;
+  }
+  header{
+    background:linear-gradient(135deg,#1f6feb22,#3fb95011);
+    border:1px solid var(--line); border-radius:16px;
+    padding:22px; margin-bottom:18px; text-align:center;
+  }
+  header h1{font-size:1.45rem; letter-spacing:-.02em; margin-bottom:6px}
+  header .sub{color:var(--dim); font-size:.86rem}
+  header .badge{
+    display:inline-block; margin-top:12px; padding:5px 14px;
+    background:var(--badbg); border:1px solid var(--bad);
+    border-radius:100px; font-size:.75rem; font-weight:600; color:var(--bad);
+    letter-spacing:.04em; text-transform:uppercase;
+  }
+  h2{
+    font-size:1.1rem; margin:26px 0 12px; padding-left:11px;
+    border-left:4px solid var(--accent); letter-spacing:-.01em;
+  }
+  .card{
+    background:var(--card); border:1px solid var(--line);
+    border-radius:14px; padding:18px; margin-bottom:14px;
+  }
+  .card.good{border-color:#238636; background:var(--okbg)}
+  .card.warn{border-color:#9e6a03; background:var(--warnbg)}
+  .card.bad{border-color:#a5252b; background:var(--badbg)}
+  .card h3{font-size:1rem; margin-bottom:8px; display:flex; align-items:center; gap:8px}
+  .card p{font-size:.92rem; color:#c9d1d9}
+  .card .val{
+    font-size:2rem; font-weight:700; letter-spacing:-.03em;
+    display:block; margin:6px 0 2px;
+  }
+  .card .range{font-size:.78rem; color:var(--dim)}
+  .good .val{color:var(--ok)} .warn .val{color:var(--warn)} .bad .val{color:var(--bad)}
+
+  .grid{display:grid; gap:12px; grid-template-columns:1fr}
+  @media(min-width:560px){ .grid.two{grid-template-columns:1fr 1fr} }
+
+  table{width:100%; border-collapse:collapse; font-size:.86rem; margin-top:8px}
+  th,td{padding:9px 8px; text-align:left; border-bottom:1px solid var(--line)}
+  th{color:var(--dim); font-weight:600; font-size:.75rem; text-transform:uppercase; letter-spacing:.05em}
+  td.num{text-align:right; font-variant-numeric:tabular-nums; font-weight:600}
+  tr:last-child td{border-bottom:none}
+  .tag{
+    display:inline-block; padding:2px 8px; border-radius:100px;
+    font-size:.7rem; font-weight:700;
+  }
+  .t-ok{background:#12331d; color:var(--ok)}
+  .t-warn{background:#332a10; color:var(--warn)}
+  .t-bad{background:#3a1a1e; color:var(--bad)}
+
+  details{
+    background:var(--card2); border:1px solid var(--line);
+    border-radius:12px; padding:14px 16px; margin-bottom:12px;
+  }
+  details summary{
+    cursor:pointer; font-weight:600; font-size:.92rem;
+    list-style:none; display:flex; justify-content:space-between; align-items:center;
+  }
+  details summary::-webkit-details-marker{display:none}
+  details summary::after{content:"▾"; color:var(--dim); font-size:.8rem}
+  details[open] summary::after{content:"▴"}
+  details[open] summary{margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid var(--line)}
+
+  ol,ul{padding-left:22px; font-size:.9rem}
+  li{margin-bottom:9px; color:#c9d1d9}
+  li strong{color:var(--txt)}
+
+  .qa{background:var(--card2); border-radius:12px; padding:16px; border-left:3px solid var(--gold)}
+  .qa ol{margin-top:8px}
+
+  .callout{
+    background:linear-gradient(135deg,#1f6feb1a,#58a6ff0d);
+    border:1px solid #1f6feb55; border-radius:12px;
+    padding:16px; font-size:.92rem; margin:16px 0;
+  }
+  .callout strong{color:var(--accent)}
+
+  footer{
+    margin-top:32px; padding-top:18px; border-top:1px solid var(--line);
+    color:var(--dim); font-size:.76rem; text-align:center; line-height:1.8;
+  }
+  .divider{height:1px; background:var(--line); margin:22px 0}
+  .emoji{font-size:1.15rem}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🫀 Reporte de Salud — Papá</h1>
+  <div class="sub">Miguel Ángel Hermoso Garrido</div>
+  <div class="sub">Estudios de Urgencias · 23 de octubre de 2026</div>
+  <div class="badge">Requiere seguimiento</div>
+</header>
+
+<div class="callout">
+  <strong>Resumen en una frase:</strong> Tenía la <strong>mano izquierda hinchada</strong> y se estudió por sospecha de coágulo — se descartó, buena noticia. Pero el laboratorio mostró tres señales que hay que vigilar: <strong>anemia bajando</strong>, <strong>azúcar alta en la orina</strong> y <strong>riñones dando aviso temprano</strong>. Ninguna es emergencia hoy. Todas necesitan médico.
+</div>
+
+<h2>✅ Lo bueno</h2>
+<div class="card good">
+  <h3><span class="emoji">🩻</span> No hay trombosis en el brazo izquierdo</h3>
+  <p><strong>El estudio se hizo porque tiene la mano izquierda hinchada.</strong> Se sospechaba un coágulo (trombosis venosa) — y el ultrasonido Doppler salió <strong>negativo</strong>. Los vasos están limpios: flujo normal, sin coágulos. Se evaluaron yugular, subclavia, axilar y braquial. <em>(Es un reporte preliminar — conviene pedir el informe final.)</em></p>
+  <p style="margin-top:10px; color:#7ee787;">✔ Cetonas negativas — no hay cetoacidosis.</p>
+  <p style="color:#7ee787;">✔ Plaquetas normalizadas (363 · venían de 583).</p>
+  <p style="color:#7ee787;">✔ Sin signos de infección urinaria activa por nitrito.</p>
+</div>
+
+<div class="card warn">
+  <h3><span class="emoji">✋</span> Pero la mano sigue hinchada — ¿y entonces por qué?</h3>
+  <p>El Doppler descartó el coágulo, que era la causa peligrosa. Quedan tres explicaciones posibles:</p>
+  <ul style="margin-top:10px">
+    <li><strong>Una vía o catéter previo en ese brazo</strong> (en la hospitalización de septiembre o en esta visita) — es la causa más común y la más benigna. Se resuelve sola.</li>
+    <li><strong>Retención de líquido</strong> — en insuficiencia cardíaca el líquido se acumula. Ojo: el mismo líquido que hincha es el que puede diluir la hemoglobina y explicar parte de la anemia.</li>
+    <li><strong>Compresión venosa o problema de drenaje linfático</strong> — menos frecuente, pero si la hinchazón apareció sin vía previa, vale que el médico lo revise.</li>
+  </ul>
+  <p style="margin-top:12px"><strong>Prueba casera útil:</strong> elevar el brazo por encima del corazón unos minutos. Si la hinchazón baja, es líquido/venoso — no una masa. Ese dato simple le sirve mucho al médico.</p>
+</div>
+
+<h2>🔴 Lo que hay que atender</h2>
+
+<div class="grid two">
+  <div class="card bad">
+    <h3><span class="emoji">🩸</span> Anemia</h3>
+    <span class="val">11.1 <small style="font-size:.9rem;font-weight:400">g/dL</small></span>
+    <span class="range">Rango normal: 13.3 – 17.9</span>
+    <p style="margin-top:10px">Y está <strong>bajando</strong> (venía de 11.5). En un hombre con el corazón comprometido esto importa.</p>
+  </div>
+
+  <div class="card bad">
+    <h3><span class="emoji">🍬</span> Azúcar en orina</h3>
+    <span class="val">3+</span>
+    <span class="range">Debería ser negativo</span>
+    <p style="margin-top:10px">Significa que el azúcar en sangre superó ~180 mg/dL en ese momento. <strong>Primera evidencia objetiva de diabetes</strong> — necesita diagnóstico con nombre.</p>
+  </div>
+
+  <div class="card warn">
+    <h3><span class="emoji">🫘</span> Aviso temprano del riñón</h3>
+    <span class="val">30 <small style="font-size:.9rem;font-weight:400">mg/dL</small></span>
+    <span class="range">Microalbúmina · límite 15</span>
+    <p style="margin-top:10px">El doble del límite. Con las <strong>células de tubo renal 4× arriba</strong>, es un patrón que conviene vigilar cada 3 meses.</p>
+  </div>
+
+  <div class="card warn">
+    <h3><span class="emoji">🦠</span> Infección leve, ya bajando</h3>
+    <span class="val">11.71 <small style="font-size:.9rem;font-weight:400">mil</small></span>
+    <span class="range">Glóbulos blancos · venían de 13.42</span>
+    <p style="margin-top:10px">Bajando, con bacterias 2+ en orina. <strong>Probablemente algo en resolución</strong> — no parece nuevo.</p>
+  </div>
+</div>
+
+<details>
+  <summary>🩸 Biometría hemática completa (tabla detallada)</summary>
+  <table>
+    <thead><tr><th>Prueba</th><th style="text-align:right">Resultado</th><th style="text-align:right">Anterior</th><th>Rango</th><th></th></tr></thead>
+    <tbody>
+      <tr><td>Leucocitos</td><td class="num">11.71</td><td class="num">13.42</td><td>4.00–10.00</td><td><span class="tag t-bad">Alto</span></td></tr>
+      <tr><td>Neutrófilos #</td><td class="num">8.82</td><td class="num">10.17</td><td>2.00–7.00</td><td><span class="tag t-bad">Alto</span></td></tr>
+      <tr><td>Linfocitos #</td><td class="num">2.00</td><td class="num">1.81</td><td>0.80–4.00</td><td><span class="tag t-ok">Normal</span></td></tr>
+      <tr><td>Monocitos #</td><td class="num">0.61</td><td class="num">1.03</td><td>0.20–1.00</td><td><span class="tag t-ok">Normal</span></td></tr>
+      <tr><td>Eosinófilos #</td><td class="num">0.23</td><td class="num">0.38</td><td>0.02–0.50</td><td><span class="tag t-ok">Normal</span></td></tr>
+      <tr><td>Basófilos #</td><td class="num">0.05</td><td class="num">0.03</td><td>0.00–0.10</td><td><span class="tag t-ok">Normal</span></td></tr>
+      <tr><td>Neutrófilos %</td><td class="num">75.30</td><td class="num">75.80</td><td>50.00–70.00</td><td><span class="tag t-bad">Alto</span></td></tr>
+      <tr><td>Linfocitos %</td><td class="num">17.10</td><td class="num">13.50</td><td>25.00–40.00</td><td><span class="tag t-bad">Bajo</span></td></tr>
+      <tr><td>Eritrocitos</td><td class="num">4.05</td><td class="num">4.30</td><td>4.50–6.50</td><td><span class="tag t-bad">Bajo</span></td></tr>
+      <tr><td><strong>Hemoglobina</strong></td><td class="num">11.10</td><td class="num">11.50</td><td>13.30–17.90</td><td><span class="tag t-bad">Bajo</span></td></tr>
+      <tr><td><strong>Hematocrito</strong></td><td class="num">36.10</td><td class="num">36.80</td><td>39.40–54.20</td><td><span class="tag t-bad">Bajo</span></td></tr>
+      <tr><td>VCM</td><td class="num">89.1</td><td class="num">85.6</td><td>80.0–100.0</td><td><span class="tag t-ok">Normal</span></td></tr>
+      <tr><td>HCM</td><td class="num">27.5</td><td class="num">26.8</td><td>22.6–33.3</td><td><span class="tag t-warn">Bajo*</span></td></tr>
+      <tr><td>CHCM</td><td class="num">30.7</td><td class="num">31.3</td><td>31.0–35.0</td><td><span class="tag t-warn">Bajo*</span></td></tr>
+      <tr><td><strong>RDW-CV</strong></td><td class="num">18.0</td><td class="num">15.3</td><td>11.0–16.0</td><td><span class="tag t-bad">Alto</span></td></tr>
+      <tr><td>RDW-SD</td><td class="num">60.7</td><td class="num">49.2</td><td>38.1–48.3</td><td><span class="tag t-bad">Alto</span></td></tr>
+      <tr><td>Plaquetas</td><td class="num">363</td><td class="num">583</td><td>145–450</td><td><span class="tag t-ok">Normal</span></td></tr>
+      <tr><td>VPM</td><td class="num">9.80</td><td class="num">10.00</td><td>8.20–12.80</td><td><span class="tag t-ok">Normal</span></td></tr>
+      <tr><td>Plaquetocrito</td><td class="num">0.356</td><td class="num">0.582</td><td>0.161–0.378</td><td><span class="tag t-ok">Normal</span></td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:.8rem;color:var(--dim);margin-top:10px">* HCM y CHCM levemente bajos, con RDW alto: glóbulos rojos de tamaños mezclados. Sugiere estudiar el hierro.</p>
+</details>
+
+<details>
+  <summary>🧪 Urinálisis (tabla detallada)</summary>
+  <table>
+    <thead><tr><th>Prueba</th><th style="text-align:right">Resultado</th><th>Referencia</th><th></th></tr></thead>
+    <tbody>
+      <tr><td>Color / Aspecto</td><td class="num">Amarillo / Claro</td><td>—</td><td><span class="tag t-ok">Normal</span></td></tr>
+      <tr><td>Gravedad específica</td><td class="num">1.019</td><td>1.000–1.030</td><td><span class="tag t-ok">Normal</span></td></tr>
+      <tr><td>pH</td><td class="num">5.00</td><td>5.00–7.00</td><td><span class="tag t-ok">Normal</span></td></tr>
+      <tr><td><strong>Glucosa</strong></td><td class="num">3+</td><td>Negativo</td><td><span class="tag t-bad">Alto</span></td></tr>
+      <tr><td>Cetonas</td><td class="num">Negativo</td><td>Negativo</td><td><span class="tag t-ok">Normal</span></td></tr>
+      <tr><td>Bilirrubina</td><td class="num">Negativo</td><td>—</td><td><span class="tag t-ok">Normal</span></td></tr>
+      <tr><td>Nitrito</td><td class="num">Negativo</td><td>Negativo</td><td><span class="tag t-ok">Normal</span></td></tr>
+      <tr><td>Sangre oculta</td><td class="num">Negativo</td><td>Negativo</td><td><span class="tag t-ok">Normal</span></td></tr>
+      <tr><td>Proteína</td><td class="num">Negativo</td><td>—</td><td><span class="tag t-ok">Normal</span></td></tr>
+      <tr><td><strong>Microalbúmina</strong></td><td class="num">30.00</td><td>0.00–15.00</td><td><span class="tag t-bad">Alto</span></td></tr>
+      <tr><td>Alb/Creat</td><td class="num">30.00</td><td>0.00–30.00</td><td><span class="tag t-warn">Techo</span></td></tr>
+      <tr><td>Prot/Creat</td><td class="num">&le;0.50</td><td>0.00–0.15</td><td><span class="tag t-bad">Alto</span></td></tr>
+      <tr><td>Eritrocitos</td><td class="num">0.1</td><td>0.0–3.0</td><td><span class="tag t-ok">Normal</span></td></tr>
+      <tr><td>Leucocitos</td><td class="num">6.0</td><td>0.0–5.0</td><td><span class="tag t-warn">Leve</span></td></tr>
+      <tr><td><strong>Células de tubo renal</strong></td><td class="num">2.1</td><td>0.0–0.5</td><td><span class="tag t-bad">×4</span></td></tr>
+      <tr><td>Bacterias</td><td class="num">2+</td><td>0–130</td><td><span class="tag t-warn">Presente</span></td></tr>
+      <tr><td>Células epiteliales</td><td class="num">8.1</td><td>0.0–5.0</td><td><span class="tag t-warn">Leve</span></td></tr>
+      <tr><td>Cilindros / Cristales</td><td class="num">No se observó</td><td>—</td><td><span class="tag t-ok">Normal</span></td></tr>
+    </tbody>
+  </table>
+</details>
+
+<h2>💡 Qué significa, en palabras simples</h2>
+
+<div class="card">
+  <h3><span class="emoji">🩸</span> La anemia</h3>
+  <p>Hay menos sangre roja de la necesaria — 11.1 donde debería haber al menos 13.3. Puede venir de <strong>falta de hierro</strong> (a veces por sangrado lento del estómago), de <strong>enfermedad crónica</strong>, o de <strong>retención de líquido</strong> que diluye la sangre. Los glóbulos son de tamaños mezclados (RDW 18), lo que apunta a hierro. <strong>Falta la prueba de hierro</strong> — no se pidió.</p>
+</div>
+
+<div class="card">
+  <h3><span class="emoji">🍬</span> El azúcar</h3>
+  <p>Normalmente el riñón filtra el azúcar y no la deja escapar. Cuando la sangre pasa de ~180 mg/dL, el riñón ya no puede retenerla y se derrama en la orina. <strong>Marcador 3+ significa que eso pasó.</strong> No es cetoacidosis (cetonas negativas), pero sí es la primera prueba objetiva de que hay un problema de azúcar que necesita diagnóstico formal con HbA1c.</p>
+</div>
+
+<div class="card">
+  <h3><span class="emoji">🫘</span> El riñón</h3>
+  <p>La microalbúmina mide proteína que se escapa por el riñón. En 30 (el doble del límite) más células de tubo renal 4× arriba, el patrón sugiere que <strong>el riñón está empezando a resentir</strong> — lo clásico cuando coinciden azúcar alta y presión alta durante años. <strong>Es temprano, y por eso mismo es el momento de actuar.</strong> Lo que se vigila: creatinina/TFG y repetir albuminuria en 3 meses.</p>
+</div>
+
+<h2>❓ Preguntas para el médico</h2>
+<div class="qa">
+  <strong>Llevar esta lista a la próxima consulta:</strong>
+  <ol>
+    <li><strong>¿La hinchazón de la mano izquierda apareció después de una vía o catéter en ese brazo, o fue espontánea?</strong> <em>Esta es la pregunta principal ahora que se descartó el coágulo.</em></li>
+    <li><strong>¿Toma algún medicamento que afecte la coagulación o el estómago?</strong> Con la hemoglobina bajando, esto es importante saberlo.</li>
+    <li><strong>¿La anemia es nueva?</strong> ¿Se puede pedir <strong>ferritina + saturación de transferrina</strong> y sangre oculta en heces?</li>
+    <li><strong>¿Está diagnosticado de diabetes?</strong> ¿Tiene una <strong>HbA1c</strong> reciente?</li>
+    <li><strong>¿Cómo está la función renal?</strong> Creatinina, TFG, y repetir microalbúmina en 3 meses.</li>
+    <li><strong>¿Cuál es el plan del corazón?</strong> Fracción de eyección, restricción de líquidos y sal, y si hay diurético.</li>
+  </ol>
+</div>
+
+<h2>📋 Otros documentos</h2>
+<div class="card">
+  <h3><span class="emoji">📄</span> Lo que conviene tener archivado</h3>
+  <ul>
+    <li>El <strong>alta hospitalaria</strong> de septiembre</li>
+    <li>La lista de <strong>doctores y turnos</strong> recomendados</li>
+    <li>El <strong>informe final</strong> del Doppler (el actual es preliminar)</li>
+  </ul>
+</div>
+
+<hr class="divider">
+
+<footer>
+  <strong>Fuente:</strong> Caja de Seguro Social — Complejo Hospitalario Dr. Arnulfo Arias Madrid, Laboratorio Clínico · Servicio de Urgencias<br>
+  Muestra: 23/10/2026 1:14 pm · Validación: 1:41 pm · Impresión: 2:09 pm<br>
+  Doppler: Telediagnóstico 2.0 · Dr. Juan Aispurua (Radiólogo)<br><br>
+  <em>Este resumen es una lectura de apoyo para la familia — no sustituye el criterio del médico tratante.<br>Los valores originales están archivados en el expediente familiar.</em>
+</footer>
+
+</body>
+</html>
